@@ -1,7 +1,7 @@
 ********For legal purposes, do not use this for malicious intent. This is a personal project that I have started for myself, and I'm doing everything in a sandbox , and I'm testing it on myself. I do not condone using this code for malicious intent********
 
 
-###############################################################################################################################################################################################################################################################################################################################################################################################################
+###################################################################################################################################################################################################################################################################################################################################################################################################################
 
 
 These are some of the problems I had and how I started this project.
@@ -17,7 +17,7 @@ Downside: It looked really bad when getting the log. So I started to look at how
 
 
 Next steps - 
-Make a privacy website on my server(Sandbox)
-Try to embed this PyCharm code into the website
-Try to make it so that when someone clicks on my website, the code installs and starts to log
+Make a privacy website on my server(Sandbox) - 
+Try to embed this PyCharm code into the website - 
+Try to make it so that when someone clicks on my website, the code installs and starts to log - 
 Have it send all the logs to the email I have listed.
